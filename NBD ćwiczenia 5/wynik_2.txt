@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+X-Riak-Vclock: a85hYGBgzGDKBVI8+xkWvnd/ulyagUFdMIMpkTmPlSHqlcQdviwA
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.9 (cafe not found)
+Link: </buckets/s24559>; rel="up"
+Last-Modified: Sat, 11 Jun 2022 10:28:42 GMT
+ETag: "5hc4cFhAujb2VipG3E4ZCd"
+Date: Sat, 11 Jun 2022 10:29:12 GMT
+Content-Type: application/json
+Content-Length: 110
+
+{'name': 'Box', 'editions': ['Throne of Eldrain', 'Modern Masters'], 'in_stock': 2, 'price': [350.00, 899.99]}

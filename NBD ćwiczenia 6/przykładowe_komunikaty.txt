@@ -1,0 +1,20 @@
+Request: put
+Response status:  204
+
+Request: get
+Response status:  200
+{'edition': '(set)Kamigawa: Betrayers of Kamigawa'}
+
+Request: put
+Response status:  204
+
+Request: get
+Response status:  200
+{'edition': '(set)Kamigawa: Betrayers of Kamigawa', 'type': 'set', 'stock': 12, 'price': 320}
+
+Request: delete
+Response status:  204
+
+Request: get
+Response status:  404
+not found

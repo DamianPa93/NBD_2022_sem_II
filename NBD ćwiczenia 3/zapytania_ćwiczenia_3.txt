@@ -1,0 +1,96 @@
+1:
+MATCH (movie:Movie)
+RETURN movie
+//
+MATCH (movie:Movie)
+RETURN movie.title
+
+2:
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (movie:Movie)
+RETURN hugo, movie
+//
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (movie:Movie)
+RETURN movie.title
+
+3:
+MATCH (director:Person) -[:DIRECTED]-> (movie:Movie)
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (movie)
+RETURN director, hugo, movie
+//
+MATCH (director:Person) -[:DIRECTED]-> (movie:Movie)
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (movie)
+RETURN DISTINCT director.name
+
+4:
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (movie:Movie)
+MATCH (actor:Person) -[:ACTED_IN]-> (movie)
+RETURN movie, hugo, actor
+//
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (movie:Movie)
+MATCH (actor:Person) -[:ACTED_IN]-> (movie)
+WHERE actor.name <> "Hugo Weaving"
+RETURN DISTINCT actor.name
+
+5:
+MATCH (actor:Person) -[:ACTED_IN]-> (matrix:Movie {title: "The Matrix"})
+MATCH (actor) -[:ACTED_IN]-> (allMovies:Movie)
+RETURN actor, allMovies
+//
+MATCH (actor:Person) -[:ACTED_IN]-> (matrix:Movie {title: "The Matrix"})
+MATCH (actor) -[:ACTED_IN]-> (allMovies:Movie)
+RETURN DISTINCT allMovies.title
+
+6:
+MATCH (actor:Person) -[moviesActed:ACTED_IN]-> (:Movie)
+RETURN actor, COUNT(moviesActed)
+//
+MATCH (actor:Person) -[moviesActed:ACTED_IN]-> (:Movie)
+RETURN actor.name, COUNT(moviesActed)
+
+7:
+MATCH (writer:Person) -[:WROTE]-> (movie:Movie)
+MATCH (director:Person) -[:DIRECTED]-> (movie)
+WHERE writer.name = director.name
+RETURN writer, director, movie
+//
+MATCH (writer:Person) -[:WROTE]-> (movie:Movie)
+MATCH (director:Person) -[:DIRECTED]-> (movie)
+WHERE writer.name = director.name
+RETURN writer.name, movie.title
+
+8:
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (hmovie:Movie)
+MATCH (kean:Person {name: "Keanu Reeves"}) -[:ACTED_IN]-> (kmovie:Movie)
+WHERE hmovie.title = kmovie.title
+RETURN hmovie, hugo, kean
+//
+MATCH (hugo:Person {name: "Hugo Weaving"}) -[:ACTED_IN]-> (hmovie:Movie)
+MATCH (kean:Person {name: "Keanu Reeves"}) -[:ACTED_IN]-> (kmovie:Movie)
+WHERE hmovie.title = kmovie.title
+RETURN hmovie.title
+
+9:
+CREATE (movie:Movie {released: 2011, tagline: "When patriots become heroes", title: "Captain America: The First Avenger"}),
+(director:Person {born: 1950, name: "Joe Johnston"}),
+(writer1:Person {born: 1970, name: "Christopher Markus"}),
+(writer2:Person {born: 1970, name: "Stephen McFeely"}),
+(writer3:Person {born: 1913, name: "Joe Simon"}),
+(actor1:Person {born: 1981, name: "Chris Evans"}),
+(actor2:Person {born: 1948, name: "Samuel L. Jackson"})
+
+MATCH (p:Person {name: "Joe Johnston"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:DIRECTED]->(m)
+MATCH (p:Person {name: "Christopher Markus"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:WROTE]->(m)
+MATCH (p:Person {name: "Stephen McFeely"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:WROTE]->(m)
+MATCH (p:Person {name: "Joe Simon"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:WROTE]->(m)
+MATCH (p:Person {name: "Chris Evans"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:ACTED_IN {roles: ["Captain America", "Steve Rogers"]}]->(m)
+MATCH (p:Person {name: "Samuel L. Jackson"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:ACTED_IN {roles: ["Nick Fury"]}]->(m)
+MATCH (p:Person {name: "Hugo Weaving"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:ACTED_IN {roles: ["Johann Schmidt","Red Skull"]}]->(m)
+MATCH (m:Movie {title: "Captain America: The First Avenger"})<-[]-(p:Person)
+RETURN *

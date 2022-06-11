@@ -1,0 +1,33 @@
+Zadanie 1
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/Bundles -H "Content-Type: application/json" -d "{'name': 'Bundle', 'editions': ['Streets of New Capena', 'Kaldheim', 'Innistrad: Midnight Hunt'], 'in_stock': 66, 'price': 150.99}" > wynik_1_1.txt
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/PreCons -H "Content-Type: application/json" -d "{'name': 'Preconstructed Deck', 'editions': ['Kaldheim', 'Kamigawa: Neon Dynasty'], 'in_stock': 15, 'price': 175.99}" > wynik_1_2.txt
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/StarterDecks -H "Content-Type: application/json" -d "{'name': 'Starter Deck', 'editions': ['Modern Horizons 2', 'Alpha', 'Urza Saga'], 'in_stock': 3, 'price': 55.00}" > wynik_1_3.txt
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/TournamentDecks -H "Content-Type: application/json" -d "{'name': 'Tournament Pack', 'editions': 'War of the Spark', 'in_stock': 4, 'price': 89.99}" > wynik_1_4.txt
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/Boxes -H "Content-Type: application/json" -d "{'name': 'Box', 'editions': ['Throne of Eldrain', 'Modern Masters'], 'in_stock': 2, 'price': [350.00, 899.99]}" > wynik_1_5.txt
+
+Zadanie 2
+curl -i -XGET http://localhost:8098/buckets/s24559/keys/Boxes > wynik_2.txt
+
+Zadanie 3
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/Bundles -H "Content-Type: application/json" -d "{'name': 'Bundle', 'editions': ['Streets of New Capena', 'Kaldheim', 'Innistrad: Midnight Hunt'], 'in_stock': 66, 'price': 150.99, 'shipment': 12.99}" > wynik_3.txt
+
+Zadanie 4
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/TournamentDecks -H "Content-Type: application/json" -d "{'name': 'Tournament Pack', 'editions': 'War of the Spark', 'price': 89.99}" > wynik_4.txt
+
+Zadanie 5
+curl -i -XPUT http://localhost:8098/buckets/s24559/keys/PreCons -H "Content-Type: application/json" -d "{'name': 'Preconstructed Deck', 'editions': ['Dominaria', 'Kamigawa: Neon Dynasty'], 'in_stock': 15, 'price': 175.99}" > wynik_5.txt
+
+Zadanie 6
+curl -i -XDELETE http://localhost:8098/buckets/s24559/keys/TournamentDecks > wynik_6.txt
+
+Zadanie 7
+curl -i -XGET http://localhost:8098/buckets/s24559/keys/TournamentDecks > wynik_7.txt
+
+Zadanie 8
+curl -i -XPOST http://localhost:8098/buckets/s24559/keys -i -H "Content-Type: application/json" -d "{'edition':'Battle for Zendikar'}" > wynik_8.txt
+
+Zadanie 9
+curl -i -XGET http://localhost:8098/buckets/s24559/keys/I3exeMisvBHdtwedVINt4IMqrIG > wynik_9.txt
+
+Zadanie 10
+curl -i -XDELETE http://localhost:8098/buckets/s24559/keys/I3exeMisvBHdtwedVINt4IMqrIG > wynik_10.txt

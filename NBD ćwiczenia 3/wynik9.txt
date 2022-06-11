@@ -1,0 +1,28 @@
+CREATE (movie:Movie {released: 2011, tagline: "When patriots become heroes", title: "Captain America: The First Avenger"}),
+(director:Person {born: 1950, name: "Joe Johnston"}),
+(writer1:Person {born: 1970, name: "Christopher Markus"}),
+(writer2:Person {born: 1970, name: "Stephen McFeely"}),
+(writer3:Person {born: 1913, name: "Joe Simon"}),
+(actor1:Person {born: 1981, name: "Chris Evans"}),
+(actor2:Person {born: 1948, name: "Samuel L. Jackson"})
+
+MATCH (p:Person {name: "Joe Johnston"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:DIRECTED]->(m)
+
+MATCH (p:Person {name: "Christopher Markus"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:WROTE]->(m)
+
+MATCH (p:Person {name: "Stephen McFeely"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:WROTE]->(m)
+
+MATCH (p:Person {name: "Joe Simon"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:WROTE]->(m)
+
+MATCH (p:Person {name: "Chris Evans"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:ACTED_IN {roles: ["Captain America", "Steve Rogers"]}]->(m)
+
+MATCH (p:Person {name: "Samuel L. Jackson"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:ACTED_IN {roles: ["Nick Fury"]}]->(m)
+
+MATCH (p:Person {name: "Hugo Weaving"}), (m:Movie {title: "Captain America: The First Avenger"})
+CREATE (p)-[:ACTED_IN {roles: ["Johann Schmidt","Red Skull"]}]->(m)

@@ -1,0 +1,45 @@
+1:
+MATCH
+(st:town{name: "Darjeeling"}),
+(ed:peak{name:'Sandakphu'}),
+p = allShortestPaths((st)-[*..3]->(ed))
+return p
+
+2:
+MATCH
+(st:town{name: "Darjeeling"}),
+(ed:peak{name:'Sandakphu'}),
+p = allShortestPaths((st)-[*]->(ed))
+WHERE all
+    (r in relationships(p)
+    WHERE r.winter = "true")   
+RETURN p
+
+3:
+MATCH p = (st:town {name: "Darjeeling"})-[r*]->(ed:peak {name: "Sandakphu"})
+UNWIND r as rel
+WITH p, COLLECT(rel.distance) AS dist
+WITH p, reduce(n = 0, d in dist | n + d) as distance
+RETURN p, distance
+ORDER BY distance ASC
+
+4:
+MATCH p = (st:town {name: "Darjeeling"})-[r:twowheeler*]->(ed)
+WHERE ALL (r IN relationships(p) WHERE r.summer = "true")
+RETURN ed
+--> returns no records/graph
+
+5:
+MATCH (flight:Flight)-[:ORIGIN]->(airport:Airport)
+WITH airport, count(flight) as flights
+RETURN airport, flights
+ORDER BY flights ASC
+
+6:
+MATCH p = (st:Airport { name:"LAX" })<-[:ORIGIN]-(:Flight)-[:ORIGIN|DESTINATION*]->(ed:Airport)
+WHERE REDUCE
+    (n = 0, 
+     x IN [y IN NODES(p) WHERE 'Flight' IN LABELS(y)] 
+      | n + [(x)<-[:ASSIGN]-(ticket) | ticket.price][0]
+    ) < 3000
+RETURN p

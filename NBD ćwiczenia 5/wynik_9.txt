@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+X-Riak-Vclock: a85hYGBgzGDKBVI8+xkWvnd/uqqWgUFdKIMpkTGPleHhK4k7fFkA
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.9 (cafe not found)
+Link: </buckets/s24559>; rel="up"
+Last-Modified: Sat, 11 Jun 2022 10:30:57 GMT
+ETag: "2qJokYIpqUsSIPqa4vNww6"
+Date: Sat, 11 Jun 2022 10:31:35 GMT
+Content-Type: application/json
+Content-Length: 33
+
+{'edition':'Battle for Zendikar'}
